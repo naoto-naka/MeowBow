@@ -19,10 +19,10 @@ services:
   db:
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: docker_db
+      MYSQL_ROOT_PASSWORD: Mysql@r00t
+      MYSQL_DATABASE: meowbow
       MYSQL_USER: docker_user
-      MYSQL_PASSWORD: docker_pass
+      MYSQL_PASSWORD: mysqL@d0c
     ports:
       - "3306:3306"
     volumes:

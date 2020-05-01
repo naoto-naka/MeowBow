@@ -13,7 +13,7 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
 
 #Laravelに必要なパッケージインストール
-RUN apt-get update && apt-get install -y git zip unzip
+RUN apt-get update && apt-get install -y git zip unzip git vim curl
 
 RUN apt-get update \
     && docker-php-ext-install pdo_mysql
