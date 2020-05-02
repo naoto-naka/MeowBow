@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
-    use SoftDeltes;
+    use SoftDeletes;
 
     protected $fillable = [
       'content'
