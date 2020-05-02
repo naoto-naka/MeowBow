@@ -11,6 +11,6 @@ class TweetsSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }
