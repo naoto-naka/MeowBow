@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Follower;
+use Carbon\Carbon;
 
 class FollowersTableSeeder extends Seeder
 {
@@ -11,6 +13,11 @@ class FollowersTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        for ($i = 2; $i <= 10; $i++) {
+          Follower::create([
+          'following_id' => $i,
+          'followed_id'  => 1,
+          ]);
+        }
     }
 }
