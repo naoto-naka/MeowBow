@@ -21,7 +21,7 @@
                 </div>
               </div>
               <div class="card-body">
-                {!! nl2br(e($timeline->text)) !!}
+                {!! nl2br(e($timeline->content)) !!}
               </div>
               <div class="card-footer py-1 d-flex justify-content-end bg-white">
                 @if ($timeline->user->id === Auth::user()->id)
