@@ -10,7 +10,8 @@ class Tweet extends Model
     use SoftDeletes;
 
     protected $fillable = [
-       'content'
+       'content',
+       'user_id'
     ];
 
     public function user()
@@ -48,6 +49,5 @@ class Tweet extends Model
     {
         return $this->with('user')->where('id', $tweet_id)->first();
     }
-
 
 }
