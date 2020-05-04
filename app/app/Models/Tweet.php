@@ -50,4 +50,14 @@ class Tweet extends Model
         return $this->with('user')->where('id', $tweet_id)->first();
     }
 
+    public function getEditTweet(Int $user_id, Int $tweet_id)
+    {
+        return $this->where('user_id', $user_id)->where('id', $tweet_id)->first();
+    }
+
+    public function tweetDestroy(Int $user_id, Int $tweet_id)
+    {
+        return $this->where('user_id', $user_id)->where('id', $user_id)->delete();
+    }
+
 }
