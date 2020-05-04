@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Comment;
 use App\Models\Tweet;
 use App\Models\Follower;
+use App\Models\User;
 use App\Http\Requests\CreateTweetRequest;
+use App\Http\Requests\UpdateTweetRequest;
 
 class TweetsController extends Controller
 {
@@ -84,9 +86,20 @@ class TweetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tweet $tweet)
     {
-        //
+        $user = auth()->user();
+        $tweets = $tweet->getEditTweet($user->id, $tweet->id);
+
+        if (!isset($tweets)) {
+            return redirect('tweets');
+        }
+
+        return view('tweets.edit', [
+            'user'  => $user,
+            'tweets' => $tweets
+        ]);
+
     }
 
     /**
@@ -96,9 +109,11 @@ class TweetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTweetRequest $request, Tweet $tweet)
     {
-        //
+        $tweet["content"] = $request->content;
+        $tweet->save();
+        return redirect('tweets');
     }
 
     /**
@@ -107,8 +122,10 @@ class TweetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user, Tweet $tweet)
     {
-        //
+        $user = auth()->user();
+        $tweet->tweetDestroy($user->id, $tweet->id);
+        return back();
     }
 }
