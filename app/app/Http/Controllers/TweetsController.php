@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Comment;
 use App\Models\Tweet;
 use App\Models\Follower;
+use App\Http\Requests\CreateTweetRequest;
 
 class TweetsController extends Controller
 {
@@ -36,7 +37,11 @@ class TweetsController extends Controller
      */
     public function create()
     {
-        //
+        $user = auth()->user();
+
+        return view('tweets.create',[
+          'user' => $user
+        ]);
     }
 
     /**
@@ -45,9 +50,13 @@ class TweetsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Tweet $tweet)
     {
-        //
+        $user = auth()->user();
+        $data = $request->all();
+        $data["user_id"] = $user->id;
+        $tweet->fill($data)->save();
+        return redirect('tweets');
     }
 
     /**
