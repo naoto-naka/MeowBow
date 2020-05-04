@@ -24,7 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'edit', 'update']]);
     Route::resource('tweets', 'TweetsController');
-    Route::resource('comments', 'CommentsController',['only' => ['store']]);
+    Route::resource('comments', 'CommentsController', ['only' => ['store']]);
+    Route::resource('favorites', 'FavoritesController', ['only' => ['store', 'destroy']]);
 
     Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
     Route::delete('users/{user}/unfollow', 'UsersController@unfollow')->name('unfollow');
