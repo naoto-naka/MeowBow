@@ -17,13 +17,20 @@
               <div class="d-flex">
                 <div>
                   @if ($user->id === Auth::user()->id)
-                    <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">プロフィールを編集する</a>
+                    <a href="{{ route('users.edit',['user' => $user]) }}" class="btn btn-primary">プロフィールを編集する</a>
                   @else
                     @if ($is_following)
-                      <form action="{{ route('unfollow',['user' => $user]) }}" method="POST">
+                      <form action="{{ route('unfollow',['user' => $user]) }}" method="POST" onClick="return confirm('フォローを解除しますか？')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-primary">フォローする</button>
+
+                        <button class="btn btn-primary">フォロー中</button>
+                      </form>
+                    @else
+                      <form action="{{ route('follow', ['user' => $user]) }}" method="POST">
+                        @csrf
+
+                        <button class="btn btn-primary">フォローする</button>
                       </form>
                     @endif
                     @if ($is_followed)
@@ -58,7 +65,7 @@
                 <img src="{{ asset('storage/profile_image/'.$user->profile_image) }}" class="rounded-circle" width="50" height="50">
                 <div class="ml-2 d-flex flex-column flex-grow-1">
                   <p class="mb-0">{{ $timeline->user->name }}</p>
-                  <a href="{{ url('users/'.$timeline->user->id) }}" class="text-secondary">{{ $timeline->user->screen_name }}</a>
+                  <a href="{{ route('users.show',['user' => $timeline->user->id]) }}" class="text-secondary">{{ $timeline->user->screen_name }}</a>
                 </div>
                 <div class="d-flex justify-content-end flex-grow-1">
                   <p class="mb-0 text-secondary">{{ $timeline->created_at->format('Y-m-d H:i') }}</p>
@@ -74,23 +81,23 @@
                       <i class="fas fa-ellipsis-v fa-fw"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <form action="{{ url('tweets/'.$timeline->id) }}" method="POST" class="mb-0">
+                      <form action="{{ route('tweets.destroy',['tweet' => $timeline->id]) }}" method="POST" class="mb-0">
                         @csrf
                         @method('DELETE')
 
-                        <a href="{{ url('tweets/'.$timeline->id.'/edit') }}" class="dropdown-item">編集</a>
-                        <button type="submit" class="dropdown-item del-btn">削除</button>
+                        <a href="{{ route('tweets.edit',['tweet' => $timeline->id]) }}" class="dropdown-item">編集</a>
+                        <button class="dropdown-item del-btn">削除</button>
                       </form>
                     </div>
                   </div>
                 @endif
 
                 <div class="mr-3 d-flex align-items-center">
-                  <a href="{{ url('tweets/'.$timeline->id) }}"><i class="far fa-comment fa-fw"></i></a>
+                  <a href="{{ route('tweets.show', ['tweet' => $timeline->id]) }}"><i class="far fa-comment fa-fw"></i></a>
                   <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
                 </div>
                 <div class="d-flex align-items-center">
-                  @if (!in_array(Auth::user()->id, array_column($timeline->fovorites->toArray(), 'user_id'), TRUE))
+                  @if (!in_array(Auth::user()->id, array_column($timeline->favorites->toArray(), 'user_id'), TRUE))
                     <form action="{{ url('favorites/') }}" method="POST" class="mb-0">
                       @csrf
 
@@ -102,7 +109,7 @@
                       @csrf
                       @method('DELETE')
 
-                      <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
+                      <button class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
                     </form>
                   @endif
                   <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>
