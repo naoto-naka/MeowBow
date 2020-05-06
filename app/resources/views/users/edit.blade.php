@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Update</div>
+          <div class="card-header">プロフィール編集</div>
 
           <div class="card-body">
-            <form action="{{ url('users/'.$user->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('users.update', ['user' => $user]) }}" method="POST" enctype="multipart/form-data">
               @csrf
               @method('PUT')
 
@@ -71,7 +71,7 @@
 
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
-                  <button type="submit" class="btn btn-primary">更新する</button>
+                  <button class="btn btn-primary">更新する</button>
                 </div>
               </div>
             </form>

@@ -9,7 +9,7 @@
             <img src="{{ asset('storage/profile_image/'.$tweet->user->profile_image) }}" class="rounded-circle" height="50">
             <div class="ml-2 d-flex flex-column">
               <p class="mb-0">{{ $tweet->user->name }}</p>
-              <a href="{{ url('users/'.$tweet->user->id) }}" class="text-secondary" >{{ $tweet->user->screen_name }}</a>
+              <a href="{{ route('users.show',['user' => $tweet->user->id]) }}" class="text-secondary" >{{ $tweet->user->screen_name }}</a>
             </div>
           </div>
           <div class="card-body">
@@ -26,8 +26,8 @@
                     @csrf
                     @method('DELETE')
 
-                    <a href="{{ url('tweets/'.$tweet->id.'/edit') }}" class="dropdown-item">編集</a>
-                    <button type="submit" class="dropdown-item del-btn">削除</button>
+                    <a href="{{ route('tweets.edit', ['user' => $tweet->id]) }}" class="dropdown-item">編集</a>
+                    <button class="dropdown-item del-btn">削除</button>
                   </form>
                 </div>
               </div>
@@ -43,14 +43,14 @@
                   @csrf
 
                   <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
-                  <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                  <button　class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
                 </form>
               @else
                 <form action="{{ url('favorites/'.array_column($tweet->favorites->toArray(), 'id', 'user_id')[$user->id]) }}" method="POST" class="mb-0">
                   @csrf
                   @method('DELETE')
 
-                  <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
+                  <button class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
                 </form>
               @endif
               <p class="mb-8 text-secondary">{{ count($tweet->favorites) }}</p>
@@ -112,7 +112,7 @@
                 <div class="form-group row mb-0">
                   <div class="col-md-12 text-right">
                     <p class="mb-4 text-danger">140文字以内</p>
-                    <button type="submit" class="btn btn-primary">
+                    <button class="btn btn-primary">
                       ツイートする
                     </button>
                   </div>

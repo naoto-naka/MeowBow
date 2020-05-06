@@ -10,7 +10,7 @@
               <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
               <div class="ml-2 d-flex flex-column">
                 <p class="mb-0">{{ $user->name }}</p>
-                <a href="" class="text-secondary">{{ $user->screen_name }}</a>
+                <a href="{{ route('users.show', ['user' => $user]) }}" class="text-secondary">{{ $user->screen_name }}</a>
               </div>
               @if (auth()->user()->isFollowed($user->id))
                 <div class="px-2">
@@ -23,13 +23,13 @@
                     @csrf
                     @method('DELETE')
 
-                    <button type="submit" class="btn btn-danger">フォロー解除</button>
+                    <button class="btn btn-danger">フォロー解除</button>
                   </form>
                 @else
                   <form action="{{ route('follow', ['user' => $user]) }}" method="POST">
                     @csrf
 
-                    <button type="submit" class="btn btn-primary">フォローする</button>
+                    <button class="btn btn-primary">フォローする</button>
                   </form>
                 @endif
               </div>
