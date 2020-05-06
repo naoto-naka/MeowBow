@@ -64,7 +64,7 @@ class UsersController extends Controller
         $follower_count = $follower->getFollowerCount($user->id);
 
         return view('users.show',[
-          'user'     => $user,
+          'user'           => $user,
           'is_following'   => $is_following,
           'is_followed'    => $is_followed,
           'timelines'      => $timelines,
