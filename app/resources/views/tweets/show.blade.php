@@ -39,11 +39,11 @@
 
             <div class="d-flex align-items-center">
               @if (!in_array($user->id, array_column($tweet->favorites->toArray(), 'user_id'), TRUE))
-                <form action="{{ url('favorites/') }}" method="POST" class="md-0">
+                <form action="{{ url('favorites/') }}" method="POST" class="mb-0">
                   @csrf
 
                   <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
-                  <button　class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                  <button class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
                 </form>
               @else
                 <form action="{{ url('favorites/'.array_column($tweet->favorites->toArray(), 'id', 'user_id')[$user->id]) }}" method="POST" class="mb-0">
@@ -53,7 +53,7 @@
                   <button class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
                 </form>
               @endif
-              <p class="mb-8 text-secondary">{{ count($tweet->favorites) }}</p>
+              <p class="mb-0 text-secondary">{{ count($tweet->favorites) }}</p>
             </div>
           </div>
         </div>

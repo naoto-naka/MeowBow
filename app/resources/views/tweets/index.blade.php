@@ -30,7 +30,7 @@
                       <i class="fas fa-ellipsis-v fa-fw"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <form action="{{ url('tweets/'.$timeline->id) }}" method="POST" class="mb-0">
+                      <form action="{{ route('tweets.destroy', ['tweet' => $timeline]) }}" method="POST" class="mb-0" onClick="confirm('ツイートを削除してよろしいでしょうか？')">
                         @csrf
                         @method('DELETE')
 
