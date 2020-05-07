@@ -13,7 +13,7 @@
                 <span class="text-secondary">{{ $user->screen_name }}</span>
               </div>
             </div>
-            <class="p-3 d-flex flex-column justify-content-between">
+            <div class="p-3 d-flex flex-column justify-content-between">
               <div class="d-flex">
                 <div>
                   @if ($user->id === Auth::user()->id)
@@ -102,7 +102,7 @@
                       @csrf
 
                       <input type="hidden" name="tweet_id" value="{{ $timeline->id }}">
-                      <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                      <button class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
                     </form>
                   @else
                     <form action="{{ url('fovorites/'.array_column($timeline->favorites->toArray(), 'id', 'user_id')[Auth::user()->id]) }}" method="POST" class="mb-0">

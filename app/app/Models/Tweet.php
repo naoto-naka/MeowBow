@@ -57,7 +57,7 @@ class Tweet extends Model
 
     public function tweetDestroy(Int $user_id, Int $tweet_id)
     {
-        return $this->where('user_id', $user_id)->where('id', $user_id)->delete();
+        return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
     }
 
 }
