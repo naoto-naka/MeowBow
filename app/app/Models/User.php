@@ -98,4 +98,10 @@ class User extends Authenticatable
         }
         return;
     }
+
+    public function deleteUser(Int $user_id)
+    {
+        User::find($user_id)->delete();
+        return;
+    }
 }

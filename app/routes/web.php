@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'edit', 'update']]);
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'edit', 'update', 'destroy']]);
     Route::resource('tweets', 'TweetsController');
     Route::resource('comments', 'CommentsController', ['only' => ['store']]);
     Route::resource('favorites', 'FavoritesController', ['only' => ['store', 'destroy']]);
