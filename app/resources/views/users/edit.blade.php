@@ -72,6 +72,12 @@
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
                   <button class="btn btn-primary">更新する</button>
+                  <form action="{{ route('users.destroy',['user' => $user]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+
+                    <button class="btn btn-danger" onclick="return confirm('本当に退会しますか？')">退会する</button>
+                  </form>
                 </div>
               </div>
             </form>
