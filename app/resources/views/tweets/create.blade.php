@@ -8,7 +8,7 @@
           <div class="card-header">投稿</div>
 
           <div class="card-body">
-            <form action="{{ route('tweets.store') }}" method="POST">
+            <form action="{{ route('tweets.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
 
               <div class="form-group row mb-0">
@@ -31,6 +31,7 @@
               </div>
 
               <div class="form-group row mb-0">
+                <input type="file" name="image_file">
                 <div class="col-md-12 text-right">
                   <p class="mb-4 text-danger">140文字以内</p>
                   <button type="submit" class="btn btn-primary">

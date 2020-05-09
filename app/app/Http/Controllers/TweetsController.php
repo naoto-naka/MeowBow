@@ -54,10 +54,19 @@ class TweetsController extends Controller
      */
     public function store(Request $request, Tweet $tweet)
     {
+
         $user = auth()->user();
         $data = $request->all();
+        unset($data["image_file"]);
         $data["user_id"] = $user->id;
         $tweet->fill($data)->save();
+        if($request->image_file) {
+          $path = $request->image_file->store('public');
+          $tweet->posts_images()->create([
+            'image_file' => basename($path)
+          ]);
+        }
+
         return redirect('tweets');
     }
 
