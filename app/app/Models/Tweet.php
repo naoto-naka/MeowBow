@@ -11,7 +11,8 @@ class Tweet extends Model
 
     protected $fillable = [
        'content',
-       'user_id'
+       'user_id',
+       'image_file'
     ];
 
     public function user()
@@ -60,4 +61,8 @@ class Tweet extends Model
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
     }
 
+    public function posts_images()
+    {
+        return $this->hasMany(PostsImage::class);
+    }
 }

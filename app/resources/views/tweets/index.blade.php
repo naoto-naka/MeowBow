@@ -21,6 +21,11 @@
                 </div>
               </div>
               <div class="card-body">
+                @if ($timeline->posts_images)
+                  @foreach ($timeline->posts_images as $image)
+                    <img src="{{ asset('storage/'.$image->image_file) }}" height="300" width="300">
+                  @endforeach
+                @endif
                 {!! nl2br(e($timeline->content)) !!}
               </div>
               <div class="card-footer py-1 d-flex justify-content-end bg-white">
