@@ -18,6 +18,7 @@
                 <div>
                   @if ($user->id === Auth::user()->id)
                     <a href="{{ route('users.edit',['user' => $user]) }}" class="btn btn-primary">プロフィールを編集する</a>
+                    <a href="{{ route('pets.create') }}" class="">ペットを追加する</a>
                   @else
                     @if ($is_following)
                       <form action="{{ route('unfollow',['user' => $user]) }}" method="POST" onClick="return confirm('フォローを解除しますか？')">
