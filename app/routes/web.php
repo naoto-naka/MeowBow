@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('tweets', 'TweetsController');
     Route::resource('comments', 'CommentsController', ['only' => ['store']]);
     Route::resource('favorites', 'FavoritesController', ['only' => ['store', 'destroy']]);
+    Route::resource('pets', 'PetsController');
 
     Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
     Route::delete('users/{user}/unfollow', 'UsersController@unfollow')->name('unfollow');
