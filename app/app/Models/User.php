@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Pet;
 
 class User extends Authenticatable
 {
@@ -103,5 +104,10 @@ class User extends Authenticatable
     {
         User::find($user_id)->delete();
         return;
+    }
+
+    public function pets()
+    {
+        return $this->hasMany(Pet::class);
     }
 }

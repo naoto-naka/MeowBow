@@ -30,7 +30,7 @@
                 <label for="screen_name" class="col-md-4 col-form-label text-md-right">{{ __('名前') }}</label>
 
                 <div class="col-md-6">
-                  <input id="screen_name" type="text" class="form-control @error('screen_name') is-invalid @enderror" name="screen_name" value="" required autocomplete="screen_name" autofocus>
+                  <input id="screen_name" type="text" class="form-control @error('screen_name') is-invalid @enderror" name="name" value="" required autocomplete="name" autofocus>
 
                   @error('screen_name')
                     <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('種類') }}</label>
 
                 <div class="col-md-6">
-                    <select name="type"　class="form-control @error('name') is-invalid @enderror" required>
+                    <select name="type"　class="type form-control @error('name') is-invalid @enderror" required>
                     　<option value="" disabled selected>---種類を選択してください---</option>
                       @foreach (Pet::TYPE as $key => $display)
                         <option value="{{ $key }}">{{ $display }}</option>
@@ -63,22 +63,36 @@
                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('品種') }}</label>
 
                 <div class="col-md-6">
-                    <select class="form-control @error('email') is-invalid @enderror" name="email" disab>
-                      <option value="" disabled selected>---品種を選択---</option>
-                      @foreach (Pet::BREED as $key => $breed)
-                        @if ($key == "DOG")
-                          @foreach ($breed as $key => $value)
-                            <option value="{{ $value }}" data-val="DOG">{{ $value }}</option>
+                    <select class="breed form-control @error('breed') is-invalid @enderror" name="breed" required>
+                      <option value="" class="msg" disabled selected>---品種を選択---</option>
+                      @foreach (Pet::BREED as $type_key => $breeds)
+                        @if ($type_key == 'DOG')
+                          @foreach ($breeds as $breed_key => $value)
+                            <option value="{{ $breed_key }}" data-val="{{ $type_key }}">{{ $value }}</option>
                           @endforeach
-                        @elseif ($key == "CAT")
-                          @foreach ($breed as $key => $value)
-                            <option value="{{ $value }}" data-val="CAT">{{ $value }}</option>
+                        @elseif ($type_key == 'CAT')
+                          @foreach ($breeds as $breed_key => $value)
+                            <option value="{{ $breed_key }}" data-val="{{ $type_key }}">{{ $value }}</option>
                           @endforeach
                         @endif
                       @endforeach
                     </select>
 
-                  @error('email')
+                  @error('breed')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="screen_name" class="col-md-4 col-form-label text-md-right">{{ __('名前') }}</label>
+
+                <div class="col-md-6">
+                  <input id="screen_name" type="text" class="form-control @error('screen_name') is-invalid @enderror" name="name" value="" required autocomplete="name" autofocus>
+
+                  @error('screen_name')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -98,4 +112,8 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('scripts')
+  <script src="{{ asset('js/interlocking_select_box.js') }}"></script>
 @endsection

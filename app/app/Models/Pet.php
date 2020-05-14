@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pet extends Model
 {
+    public $fillable = [
+      'profile_image',
+      'name',
+      'type',
+      'breed'
+    ];
+
     const TYPE = [
       'DOG'   => 'いぬ',
       'CAT'   => 'ねこ',
@@ -14,9 +21,9 @@ class Pet extends Model
 
     const BREED = [
         'DOG' => [
-          'SHIBA'  => '柴犬',
-          'CORGI'  => 'コーギー',
-          'POME'   => 'ポメラニアン',
+          'SHIBA' => '柴犬',
+          'CORGI' => 'コーギー',
+          'POME'  => 'ポメラニアン',
         ],
         'CAT' => [
           'AMESHO' => 'アメリカンショートヘア',
