@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pet;
 
 class PetsController extends Controller
 {
@@ -32,9 +33,17 @@ class PetsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Pet $pet)
     {
-        //
+        $form = $request->all();
+        $user = auth()->user();
+        $pet->profile_image = $request->profile_image;
+        $pet->name  = $request->name;
+        $pet->type  = $request->type;
+        $pet->breed = $request->breed;
+        $pet->profile_comment = $request->profile_comment;
+        $user->pets()->save($pet);
+        return redirect()->route('users.show', ['user' => $user]);
     }
 
     /**

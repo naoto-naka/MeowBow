@@ -19,8 +19,8 @@ class CreatePetsTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->string('breed');
-            $table->string('image');
-            $table->string('plofile_comment');
+            $table->string('profile_image')->nullable();
+            $table->string('profile_comment')->nullable();
             $table->timestamps();
 
             $table->index('id');
@@ -41,8 +41,6 @@ class CreatePetsTable extends Migration
      */
     public function down()
     {
-        Schema::table('pets', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('pets');
     }
 }
