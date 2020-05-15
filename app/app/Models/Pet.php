@@ -10,7 +10,8 @@ class Pet extends Model
       'profile_image',
       'name',
       'type',
-      'breed'
+      'breed',
+      'profile_comment'
     ];
 
     const TYPE = [

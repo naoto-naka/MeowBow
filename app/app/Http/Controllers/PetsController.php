@@ -41,6 +41,7 @@ class PetsController extends Controller
         $pet->name  = $request->name;
         $pet->type  = $request->type;
         $pet->breed = $request->breed;
+        $pet->profile_comment = $request->profile_comment;
         $user->pets()->save($pet);
         return redirect()->route('users.show', ['user' => $user]);
     }

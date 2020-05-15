@@ -27,7 +27,7 @@
               </div>
 
               <div class="form-group row">
-                <label for="screen_name" class="col-md-4 col-form-label text-md-right">{{ __('名前') }}</label>
+                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('名前') }}</label>
 
                 <div class="col-md-6">
                   <input id="screen_name" type="text" class="form-control @error('screen_name') is-invalid @enderror" name="name" value="" required autocomplete="name" autofocus>
@@ -41,7 +41,7 @@
               </div>
 
               <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('種類') }}</label>
+                <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('種類') }}</label>
 
                 <div class="col-md-6">
                     <select name="type"　class="type form-control @error('name') is-invalid @enderror" required>
@@ -60,7 +60,7 @@
               </div>
 
               <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('品種') }}</label>
+                <label for="breed" class="col-md-4 col-form-label text-md-right">{{ __('品種') }}</label>
 
                 <div class="col-md-6">
                     <select class="breed form-control @error('breed') is-invalid @enderror" name="breed" required>
@@ -87,12 +87,12 @@
               </div>
 
               <div class="form-group row">
-                <label for="screen_name" class="col-md-4 col-form-label text-md-right">{{ __('名前') }}</label>
+                <label for="profile_comment" class="col-md-4 col-form-label text-md-right">{{ __('プロフィールコメント') }}</label>
 
                 <div class="col-md-6">
-                  <input id="screen_name" type="text" class="form-control @error('screen_name') is-invalid @enderror" name="name" value="" required autocomplete="name" autofocus>
+                  <textarea id="profile_comment"  class="form-control @error('profile_comment') is-invalid @enderror" name="profile_comment" autocomplete="profile_comment"></textarea>
 
-                  @error('screen_name')
+                  @error('profile_comment')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>

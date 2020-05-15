@@ -19,8 +19,8 @@ class CreatePetsTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->string('breed');
-            $table->string('profile_image');
-            $table->string('profile_comment');
+            $table->string('profile_image')->nullable();
+            $table->string('profile_comment')->nullable();
             $table->timestamps();
 
             $table->index('id');
