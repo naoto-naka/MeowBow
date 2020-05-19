@@ -63,9 +63,9 @@ class PetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pet $pet)
     {
-        //
+        return view('pets.edit', ['pet' => $pet]);
     }
 
     /**
@@ -75,9 +75,12 @@ class PetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pet $pet)
     {
-        //
+        $user = auth()->user();
+        $form = $request->all();
+        $pet->fill($form)->save();
+        return redirect()->route('users.show', ['user' => $user]);
     }
 
     /**

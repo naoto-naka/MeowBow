@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="d-flex justify-content-end">
-                <div class="p-2 d-flex flex-column align-items-center">
+                <div class="p-w d-flex flex-column align-items-center">
                   <p class="font-weight-bold">ツイート数</p>
                   <span>{{ $tweet_count }}</span>
                 </div>
@@ -58,6 +58,41 @@
           </div>
         </div>
       </div>
+
+      @if (isset($pets))
+        @foreach ($pets as $pet)
+            <div class="col-md-8 mb-3">
+              <div class="card">
+                <div class="d-inline-flex">
+                  <div class="p-3 d-flex flex-column">
+                    <img src="{{ asset('storage/profile_image/'.$user->profile_image) }}" class="rounded-circle" width="100" height="100">
+                    <div class="mt-3 d-flex flex-column">
+                      <h4 class="mb-0 font-weight-bold">
+                        <a href="{{ route('pets.show', ['pet' => $pet]) }}">{{ $pet->name }}</a>
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="p-3 d-flex flex-column justify-content-between">
+                    <div class="d-flex">
+                      <div>
+                        {{ $pet->type }}
+                        {{ $pet->breed }}
+                        {{ $pet->profile_comment }}
+                        @if ($user->id === Auth::user()->id)
+                          <a href="{{ route('pets.edit', ['pet' => $pet]) }}" class="btn btn-primary">プロフィールを編集する</a>
+                        @endif
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        @endforeach
+      @endif
+
+
+
+
       @if (isset($timelines))
         @foreach ($timelines as $timeline)
           <div class="col-md-8 mb-3">
@@ -82,11 +117,11 @@
                       <i class="fas fa-ellipsis-v fa-fw"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <form action="{{ route('tweets.destroy',['tweet' => $timeline->id]) }}" method="POST" class="mb-0">
+                      <form action="{{ route('tweets.destroy', ['tweet' => $timeline->id]) }}" method="POST" class="mb-0">
                         @csrf
                         @method('DELETE')
 
-                        <a href="{{ route('tweets.edit',['tweet' => $timeline->id]) }}" class="dropdown-item">編集</a>
+                        <a href="{{ route('tweets.edit', ['tweet' => $timeline->id]) }}" class="dropdown-item">編集</a>
                         <button class="dropdown-item del-btn">削除</button>
                       </form>
                     </div>

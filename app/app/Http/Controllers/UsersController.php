@@ -62,6 +62,7 @@ class UsersController extends Controller
         $tweet_count  = $tweet->getTweetCount($user->id);
         $follow_count = $follower->getFollowCount($user->id);
         $follower_count = $follower->getFollowerCount($user->id);
+        $pets = $login_user->pets;
 
         return view('users.show',[
           'user'           => $user,
@@ -71,6 +72,7 @@ class UsersController extends Controller
           'tweet_count'    => $tweet_count,
           'follow_count'   => $follow_count,
           'follower_count' => $follower_count,
+          'pets'           => $pets,
         ]);
     }
 
